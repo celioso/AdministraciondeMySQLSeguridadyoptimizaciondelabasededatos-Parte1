@@ -477,3 +477,5 @@ Lo que aprendimos en esta aula:
 - A realizar el backup lógico a través de mysqldump.
 - A realizar el backup físico copiando toda la estructura de datos en otro directorio.
 - A recuperar el backup usando MySQL a través del símbolo del sistema o copiando de nuevo la estructura de archivos.
+
+### End
