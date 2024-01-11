@@ -274,3 +274,206 @@ Lo que aprendimos en esta aula:
 ¿Comenzando en esta etapa? Aquí puedes descargar los archivos del proyecto que hemos avanzado hasta el aula anterior.
 
 [Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/aula-5/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/aula-5.zip "aquí") para descargarlos directamente.
+
+### crear back up
+
+Para crear el Back up no dirigio a la capeta MySQL Server 8.0\bin.
+
+```cmd
+C:\Users\celio>cd\
+C:\>cd "Program Files"
+C:\Program Files>cd MySQL
+C:\Program Files\MySQL> cd "MySQL Server 8.0"
+C:\Program Files\MySQL\MySQL Server 8.0>cd bin
+```
+luego usamos el comando mysqldump
+`C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump`
+nos muestra los siguiente comandos
+```cmd
+Usage: mysqldump [OPTIONS] database [tables]
+OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
+OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
+For more options, use mysqldump --help
+```
+crear el back up con el sigiente comando
+```cmd
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump -uroot -p --databases <"la base de datos"> > <"Carpeta de destino">.sql
+
+Ejemplo:
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump -uroot -p --databases jugos_ventas > C:\Users\celio\OneDrive\Escritorio\data\jugos_ventas_full.sql
+Enter password: **********
+```
+crear un back up pero que ignore una tabla:
+
+```cmd
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump -uroot -p --databases jugos_ventas --ignore-table <"DataBase">.<"Tabla"> > <"carpeta de destino">.sql
+Enter password: **********
+
+Ejemplo:
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump -uroot -p --databases jugos_ventas --ignore-table jugos_ventas.facturas > C:\Users\celio\OneDrive\Escritorio\data\jugos_ventas_sin_facturas.sql
+Enter password: **********
+```
+
+### recuperar Back Up
+
+ingresar a MySQL  desde cmd  `C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -uroot -p`
+
+```cmd
+mysql> USE world;
+Database changed
+mysql> SELECT * FROM city;
+mysql> exit
+```
+para cargar el binario del back up se usa la siguiente linea de codigo 
+
+```cmd
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -uroot -p < <"donde se localiza el BAck up">.sql
+Enter password: **********
+
+Ejemplo:
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -uroot -p < C:\Users\celio\OneDrive\Escritorio\data\jugos_ventas_full.sql
+Enter password: **********
+```
+
+### Haga lo que hicimos en aula
+
+Llegó la hora de que sigas todos los pasos realizados por mí durante esta clase. Si ya lo has hecho ¡Excelente! Si todavía no lo has hecho, es importante que ejecutes lo que fue visto en los vídeos para que puedas continuar con la próxima aula.
+
+1) Crea un directorio llamado `sql_dba`, en el drive `C:\`.
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/10.png)
+
+2. En el símbolo del sistema de Windows, digita los siguientes comandos:
+
+```SQL
+cd\
+cd "Program Files"
+cd "MySQL"
+cd "MySQL 8.0"
+cd Bin
+```
+
+3. Para realizar un backup de la base jugos_ventas, digita:
+
+```SQL
+mysqldump -uroot -p --databases jugos_ventas > c:\mysqladmin\jugos_ventas_full.sql
+```
+
+La contraseña del usuario root será necesaria para la ejecución del comando.
+
+4. Dentro del archivo `C:\sql_dba\jugos_ventas_full.sql`, tendrás los comandos para recuperar la base jugos_ventas.
+
+5. Para realizar un backup de todas las tablas de la base **jugos_ventas**, excepto la tabla **facturas**, ejecuta el siguiente comando:
+
+```SQL
+mysqldump -uroot -p --databases jugos_ventas --ignore-table jugos_ventas.facturas > c:\sql_dba\jugos_ventas_sin_facturas.sql
+```
+
+6. En la página [https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html "https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html"), podrás encontrar todas las opciones que ofrece **mysqldump**.
+
+7. También, podemos hacer el backup lógico a través de Workbench. Para eso, hay que abrirlo.
+
+8. Antes del proceso, debes "desactivar" el banco, para realizar el proceso de creación del *backup*. Para ello, haz doble clic sobre la base **jugos_ventas**. En el script, digita y ejecuta:
+```SQL
+LOCK INSTANCE FOR BACKUP;
+```
+
+9. En la pestaña **Administration**, selecciona la opción **Data Export**:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/11.png)
+
+10. Selecciona la base **jugos_ventas** y marca la opción **Export to Self-Contained File:**
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/12.png)
+
+11. Al lado, incluye el nombre del archivo: **C:\sql_dba\jugos_ventas_full_workbench.sql.**
+
+12. Haz clic en el botón **Start Export**.
+
+13. Observa que, en el directorio de salida **C:\sql_dba\**,un nuevo archivo fue creado, con el mismo contenido del archivo creado por **mysqldump**.
+
+14. Adicionalmente, puedes exportar cada componente de la base (en este caso, las tablas) en un archivo, separadamente. Para ello, nuevamente haz clic en Data Export, selecciona la base **jugos_ventas** y marca la opción **Export to Dump Project Folder**.
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/13.png)
+
+15. Al lado, incluye el nombre del directorio: **C:\sql_dba\backup_jugos_ventas**.
+
+16. Haz clic en el botón **Start Export**.
+
+17. Observa que, en el directorio de salida (C:\sql_dba), encontrarás una carpeta y dentro de ella habrá diversos archivos representando las diferentes tablas:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/14.png)
+
+18. Otra forma de hacer el backup es copiando toda la estructura de la base. Pero antes, en el directorio **C:\sql_dba\**, Crea un nuevo directorio llamado `back-up_fisico`.
+
+19. Dirígete hacia `C:\ProgramData\MySQL\MySQL Server 8.0` y copia el archivo `my.ini` en el directorio `C:\sql_dba\back-up_fisico\`.
+
+20. Después, copia el directorio (y todo su contenido) `C:\ProgramData\MySQL\MySQL Server 8.0\Data` en `C:\sql_dba\back-up_fisico\`.
+
+21. Lo que fue almacenado en `C:\sql_dba\back-up_fisico\` es todo el ambiente de datos, guardado en otro disco.
+
+22. Al finalizar el procedimiento, puedes habilitar nuevamente la instancia, digitando el siguiente comando:
+
+```SQL
+UNLOCK INSTANCE
+```
+
+23. Para recuperar el *backup*, primeramente, en Workbench, elimina la base **jugos_ventas**, digitando:
+
+```SQL
+DROP DATABASE jugos_ventas;
+```
+
+24. Este backup también quedó almacenado en: `C:\sql_dba\jugos_ventas_full.sql`. Ahora, abre una ventana del símbolo del sistema de Windows y digita:
+```SQL
+cd\
+cd "Program Files"
+cd "MySQL"
+cd "MySQL 8.0"
+cd Bin
+```
+
+25. Ejecuta:
+
+```SQL
+mysql -uroot -p < c:\sql_dba\jugos_ventas_full.sql
+```
+
+26. Así, se creará la base y sus datos nuevamente.
+
+27. Finalmente, podemos recuperar la base mediante archivos físicos. Para ello, en Workbench, elimina una vez más la base:
+
+```SQL
+DROP DATABASE jugos_ventas;
+```
+
+28. Cierra el Workbench y detén el servicio de MySQL.
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/15.png)
+
+29. Dirígete hacia `C:\sql_dba\back-up_fisico\` y copia el archivo my.ini en el directorio` C:\ProgramData\MySQL\MySQL Server 8.0`.
+
+30. Después, copia el directorio (y todo su contenido) `C:\sql_dba\back-up_fisico\` en `C:\ProgramData\MySQL\MySQL Server 8.0\Data` Puedes decirle que sí para reemplazar todos los archivos.
+
+31. Habilita nuevamente el servicio de MySQL:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/16.png)
+
+32. Entra a Workbench y observa que la base de datos jugos_ventas volvió a estar diponible.
+
+### Proyecto final
+
+Aquí puedes descargar los archivos del proyecto completo.
+
+[Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/proyecto-final/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/proyecto-final.zip "aquí") para descargarlos directamente.
+
+### Lo que aprendimos
+
+Lo que aprendimos en esta aula:
+
+- A realizar el backup lógico a través de mysqldump.
+- A realizar el backup físico copiando toda la estructura de datos en otro directorio.
+- A recuperar el backup usando MySQL a través del símbolo del sistema o copiando de nuevo la estructura de archivos.
