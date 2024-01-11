@@ -183,3 +183,94 @@ Lo que aprendimos en esta aula:
 ¿Comenzando en esta etapa? Aquí puedes descargar los archivos del proyecto que hemos avanzado hasta el aula anterior.
 
 [Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/aula-4/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/aula-4.zip "aquí") para descargarlos directamente.
+
+### Haga lo que hicimos en aula
+
+Llegó la hora de que sigas todos los pasos realizados por mí durante esta clase. Si ya lo has hecho ¡Excelente! Si todavía no lo has hecho, es importante que ejecutes lo que fue visto en los vídeos para que puedas continuar con la próxima aula.
+
+1. Ahora bien, sobre mecanismos de almacenamiento, durante la creación de la tabla, es posible determinar cuál mecanismo la misma estará utilizando. Crea una tabla, en la base de datos sakila, conforme al siguiente comando:
+
+```SQL
+CREATE TABLE df_table (ID INT, NOMBRE VARCHAR(100));
+```
+
+2. Si te diriges hacia Tables, en el árbol de objetos de Workbench y haz clic sobre el ícono de información, verás las características de almacenamiento de la tabla que fue creada:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/1.png)
+
+3. Ahora, puedes observar que, por defecto, las tablas son creadas con el mecanismo de almacenamiento **InnoDB**:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/2.png)
+
+4. Es posible alterar la propiedad del mecanismo de almacenamiento de la tabla, con el comando:
+
+```SQL
+ALTER TABLE DEFAULT_TABLE ENGINE = MyISAM;
+```
+
+5. Adicionalmente, puedes definir el tipo de mecanismo de almacenamiento que será usado en una tabla al momento de su creación. Para ello, digite:
+
+```SQL
+CREATE TABLE df_table1 (ID INT, NOMBRE VARCHAR(100)) ENGINE = MEMORY;
+```
+
+6. Cuando crees una tabla por el asistente de Workbench, puedes ver la opción de selección de mecanismos de almacenamiento, siempre presentando a **InnoDB** como estándar:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/3.png)
+
+7. Los componentes de la base quedan almacenados en una base de datos. Puedes crear una nueva base de datos con el siguiente comando (para este caso, será creada con el nombre de base):
+
+```SQL
+CREATE DATABASE base;
+```
+
+8. La base de datos puede ser creada, también, por el asistente de Workbench. Para ello, haz clic con el botón derecho del mouse en un espacio vacío de la lista de componentes, a la izquierda de Workbench, y escoge la opción **Create Schema...**:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/4.png)
+
+9. Crea una nueva base llamada base2, pero utilizando el asistente. Para ello, digita su nombre en la opción **Name**:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/5.png)
+
+10. Cuando fueron creadas estas bases, MySQL escribió en el disco duro los archivos físicos que las representan. Para saber en qué directorio estos archivos fueron creados, puedes consultar el valor de la variable de entorno con **Variable_Name**:
+
+```SQL
+SHOW VARIABLES WHERE Variable_Name LIKE '%dir';
+```
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/6.png)
+
+Este comando mostrará todas las variables de entorno que acaban con `dir`. La variable que indica el camino hacia el directorio donde están almacenadas las bases de datos es `datadir`.
+
+11. En dicho directorio, encontrarás los siguientes elementos:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/7.png)
+
+Existe un subdirectorio para cada base.
+
+12. La inicialización de esta variable datadir está en el archivo `my.ini`:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/8.png)
+
+```SQL
+DROP DATABASE base2;
+```
+
+14. También se puede eliminar a través del asistente de Workbench. Para ello, haz clic con el botón derecho del mouse sobre la base de datos que será excluida y escoge la opción **Drop Schema...**:
+
+![](https://caelum-online-public.s3.amazonaws.com/ESP+-+1838+-+Administraci%C3%B3n+de+MySQL%3A+Seguridad+y+optmizaci%C3%B3n+de+la+base+de+datos+-+Parte+1+/9.png)
+
+### Lo que aprendimos
+
+Lo que aprendimos en esta aula:
+
+- A determinar el mecanismo de almacenamiento al momento de crear las tablas.
+- A alterar el mecanismo de almacenamiento con las tablas creadas.
+- A crear y eliminar bases de datos.
+- A cambiar el directorio donde se almacena la base de datos.
+
+### Proyecto del aula anterior
+
+¿Comenzando en esta etapa? Aquí puedes descargar los archivos del proyecto que hemos avanzado hasta el aula anterior.
+
+[Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/aula-5/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/aula-5.zip "aquí") para descargarlos directamente.
