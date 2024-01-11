@@ -128,3 +128,58 @@ Lo que aprendimos en esta aula:
 
 [Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/aula-3/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/aula-3.zip "aquí") para descargarlos directamente.
 
+### Variable sde ambiente
+
+`C:\ProgramData\MySQL\MySQL Server 8.0`
+
+### Haga lo que hicimos en aula
+
+Llegó la hora de que sigas todos los pasos realizados por mí durante esta clase. Si ya lo has hecho ¡Excelente! Si todavía no lo has hecho, es importante que ejecutes lo que fue visto en los vídeos para que puedas continuar con la próxima aula.
+
+1. Las variables que están declaradas en el directorio **C:\ProgramData\MySQL\MySQL Server 8.0\my.ini** Serán inicializadas con los valores declarados en el archivo siempre que el servicio MySQL sea ejecutado.
+
+2. En el siguiente link, podrás ver la documentación de numerosas variables de ambiente: [https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html "https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html")
+
+3. El valor de las variables durante la sesión puede ser visualizado en Workbench. Acceda a Workbench y, en la base de datos sakila, digita en un script de SQL:
+
+```SQL
+SHOW GLOBAL STATUS LIKE 'Created_tmp_disk_tables';
+```
+
+4. Inclusive, en la base de datos **sakila**, otra variable puede ser observada:
+
+```SQL
+SHOW GLOBAL STATUS LIKE 'Created_tmp_tables';
+```
+
+Estas dos variables están relacionadas con el número de tablas temporales que pueden ser abiertas durante una sesión en memoria y en disco. Claro que esto influye en el desempeño de la base, en caso que se necesite usar el HD para almacenar tablas temporales creadas por MySQL durante los comandos SQL.
+
+5. La variable **tmp_table_size**, que fue inicializada por el archivo my.ini, tiene el valor de 35 y puede ser visto a través del siguiente comando de WorkBench:
+
+```SQL
+SHOW GLOBAL VARIABLES LIKE 'tmp_table_size';
+```
+
+¿Cuál es el valor que te muestra?
+
+6. La variable de ambiente puede ser modificada por el usuario que tenga privilegios para ello. Así, de nuevo en la base de datos **sakila**, digita el siguiente comando:
+
+```SQL
+SET GLOBAL tmp_table_size = 136700160;
+```
+
+7. De esta manera, es posible modificar el valor de dicha variable e ignorar lo que estaba, inicialmente, especificado en el archivo **my.ini**.
+
+### Lo que aprendimos
+
+Lo que aprendimos en esta aula:
+
+- La importancia de las variables de entorno/ambiente.
+- Cómo modificar las variables de ambiente utilizando Workbench.
+- A distinguir qué son los mecanismos de almacenamiento y los tipos principales, con sus características.
+
+### Proyecto del aula anterior
+
+¿Comenzando en esta etapa? Aquí puedes descargar los archivos del proyecto que hemos avanzado hasta el aula anterior.
+
+[Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/aula-4/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/aula-4.zip "aquí") para descargarlos directamente.
