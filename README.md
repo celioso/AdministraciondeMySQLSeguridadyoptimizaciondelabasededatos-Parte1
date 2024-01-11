@@ -97,3 +97,34 @@ Lo que aprendimos en esta aula:
 ¿Comenzando en esta etapa? Aquí puedes descargar los archivos del proyecto que hemos avanzado hasta el aula anterior.
 
 [Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/aula-2/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/aula-2.zip "aquí") para descargarlos directamente.
+
+### Detener o reiniciar el servicio
+#### por sistema
+se busca **servicio** en windows, buscamos en servivcios locales MySQL y se detiene y esto lo reinicia y para activarlo se sigue el mismo camino solo se les da iniciar.
+
+####  simbolo de sistema
+ con los comandos para activar o detener
+ 
+- detener
+` net stop mysql80`
+
+- activar
+`net start mysql80`
+
+### Haga lo que hicimos en aula
+
+Llegó la hora de que sigas todos los pasos realizados por mí durante esta clase. Si ya lo has hecho ¡Excelente! Si todavía no lo has hecho, es importante que ejecutes lo que fue visto en los vídeos para que puedas continuar con la próxima aula.
+
+### Lo que aprendimos
+
+Lo que aprendimos en esta aula:
+
+- A crear conexiones y a distribuirlas entre los clientes.
+- A detener y a reiniciar el servicio de MySQL.
+
+### Proyecto del aula anterior
+
+¿Comenzando en esta etapa? Aquí puedes descargar los archivos del proyecto que hemos avanzado hasta el aula anterior.
+
+[Descargue los archivos en Github](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/blob/aula-3/comandos.sql "Descargue los archivos en Github") o haga clic [aquí](https://github.com/alura-es-cursos/1838-administracion-de-mysql-parte-1/archive/refs/heads/aula-3.zip "aquí") para descargarlos directamente.
+
